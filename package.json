@@ -1,0 +1,39 @@
+{
+  "name": "tweet-splitter",
+  "version": "0.0.1",
+  "description": "Split a long Tweet into 140 character chunks (with appended numbers).",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run babel && npm run uglify && npm run scss && npm run inline",
+    "babel": "babel src/index.js -d app && mv app/src/index.js app && rm -r app/src",
+    "inline": "html-inline -i app.html -o index.html",
+    "scss": "node-sass -x -o app --output-style compressed src/index.scss",
+    "scss:watch": "node-sass -x -w -o app --output-style compressed src/index.scss",
+    "serve": "browser-sync start --server",
+    "uglify": "uglifyjs app/index.js -m -c -o app/index.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damonbauer/tweet-splitter.git"
+  },
+  "keywords": [
+    "twitter",
+    "tweet",
+    "long tweet",
+    "string"
+  ],
+  "author": "Damon Bauer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/damonbauer/tweet-splitter/issues"
+  },
+  "homepage": "https://github.com/damonbauer/tweet-splitter#readme",
+  "devDependencies": {
+    "babel-cli": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "browser-sync": "^2.10.0",
+    "html-inline": "^1.2.0",
+    "node-sass": "^3.4.2",
+    "uglify-js": "^2.6.1"
+  }
+}
