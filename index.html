@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tweet Splitter</title>
-    <style>@import "//brick.a.ssl.fastly.net/Latin+Modern+Mono:400";#wrap,#tweet,button{font-family:"Latin Modern Mono", monospace}*{box-sizing:border-box}html{background-color:#fafafa}body{margin:0 3em;font-size:1.25em;overflow-x:hidden}@media (max-width: 500px){body{margin:0}}body:before{content:"";position:absolute;z-index:-1;width:140%;height:50%;left:-20%;top:25%;background-color:#65f29b;transform:rotate(-10deg) skew(-20deg)}@media (max-width: 500px){body:before{height:80%;top:15%}}#wrap{max-width:500px;margin:0 auto}h1{text-align:center;color:#65f29b;letter-spacing:4px}@media (max-width: 600px){h1{font-size:1.5em}}@media (max-width: 500px){h1{letter-spacing:0}}p{font-size:1.125em}#tweet{display:block;width:100%;height:250px;padding:0.5em 0.5em 1.5em;margin-bottom:2em;border:10px solid #65f29b;resize:none;font-size:1em;background-color:#fafafa;transition:border-color ease 0.2s}#tweet:focus,#tweet:active{outline:0;border-color:#FFB86A}button{cursor:pointer;display:block;padding:0.5em;border:5px solid #65f29b;margin:0 auto;background-color:#fafafa;transition:border-color ease 0.2s}button:focus,button:active{outline:0;border-color:#FFB86A}button#submit{position:relative;margin-top:-2.5em;font-size:1.5em}button#reset{font-size:0.75em;margin-top:1em}#output{margin-top:1em;background-color:#fafafa;border:10px solid #65f29b}#output p{padding:0.5em}footer{clear:both;text-align:center;background-color:#65f29b;padding:1em 0}footer a{color:#dbfce7;text-decoration:none}footer a:hover,footer a:active{text-decoration:underline;color:#fff}
+    <style>@import "//brick.a.ssl.fastly.net/Latin+Modern+Mono:400";#wrap,#tweet,button{font-family:"Latin Modern Mono", monospace}*{box-sizing:border-box}html{background-color:#fafafa}body{margin:0 3em;font-size:1.25em;overflow-x:hidden}@media (max-width: 500px){body{margin:0}}body:before{content:"";position:absolute;z-index:-1;width:140%;height:50%;left:-20%;top:25%;background-color:#65f29b;transform:rotate(-10deg) skew(-20deg)}@media (max-width: 500px){body:before{height:80%;top:15%}}#wrap{max-width:500px;margin:0 auto}h1{text-align:center;color:#65f29b;letter-spacing:4px}@media (max-width: 600px){h1{font-size:1.5em}}@media (max-width: 500px){h1{letter-spacing:0}}p{font-size:1.125em}#tweet{display:block;width:100%;height:250px;padding:0.5em 0.5em 1.5em;margin-bottom:2em;border:10px solid #65f29b;resize:none;font-size:1em;background-color:#fafafa;transition:border-color ease 0.2s}#tweet:focus,#tweet:active{outline:0;border-color:#FFB86A}.tweetWrapper{position:relative}.tweetWrapper #counter{position:absolute;right:1em;bottom:-1.5em}button{cursor:pointer;display:block;padding:0.5em;border:5px solid #65f29b;margin:0 auto;background-color:#fafafa;transition:border-color ease 0.2s}button:focus,button:active{outline:0;border-color:#FFB86A}button#submit{position:relative;margin-top:-2.5em;font-size:1.5em}button#reset{font-size:0.75em;margin-top:1em}#output{margin-top:1em;background-color:#fafafa;border:10px solid #65f29b}#output p{padding:0.5em}footer{clear:both;text-align:center;background-color:#65f29b;padding:1em 0}footer a{color:#dbfce7;text-decoration:none}footer a:hover,footer a:active{text-decoration:underline;color:#fff}
 </style>
   </head>
   <body>
@@ -14,7 +14,10 @@
 
       <p>Because sometimes, a tweet needs more than 140 characters.</p>
 
-      <textarea name="tweet" id="tweet" placeholder="Enter your tweet."></textarea>
+      <div class="tweetWrapper">
+        <textarea name="tweet" id="tweet" placeholder="Enter your tweet."></textarea>
+        <div id="counter">0</div>
+      </div>
 
       <button id="submit">Submit</button>
       <button id="reset">Reset</button>
@@ -26,6 +29,6 @@
       </footer>
     </div>
 
-    <script>"use strict";var TEXTAREA=document.getElementById("tweet"),OUTPUT=document.getElementById("output"),generateTweets=function(){var e=TEXTAREA.value,t=Math.ceil(e.length/140);OUTPUT.innerHTML="",t>1?!function(){var n=t>9?129:131,T=e.match(new RegExp("[\\s\\S]{1,"+n+"}","g"));T.forEach(function(e,t){var n=t+1,c=T.length,i=c>n?"...":"";buildTweetText(""+e+i+" ("+n+"/"+c+")")})}():buildTweetText(e)},buildTweetText=function(e){var t=document.createElement("p");t.innerHTML=e,OUTPUT.appendChild(t)};document.getElementById("submit").addEventListener("click",generateTweets),document.getElementById("reset").addEventListener("click",function(){TEXTAREA.value="",OUTPUT.innerHTML=""});</script>
+    <script>"use strict";var TEXTAREA=document.getElementById("tweet"),OUTPUT=document.getElementById("output"),COUNTER=document.getElementById("counter"),generateTweets=function(){var e=TEXTAREA.value,t=Math.ceil(e.length/140);OUTPUT.innerHTML="",t>1?!function(){var n=t>9?129:131,T=e.match(new RegExp("[\\s\\S]{1,"+n+"}","g"));T.forEach(function(e,t){var n=t+1,u=T.length,c=u>n?"...":"";buildTweetText(""+e+c+" ("+n+"/"+u+")")})}():buildTweetText(e)},buildTweetText=function(e){var t=document.createElement("p");t.innerHTML=e,OUTPUT.appendChild(t)};document.getElementById("submit").addEventListener("click",generateTweets),document.getElementById("reset").addEventListener("click",function(){TEXTAREA.value="",OUTPUT.innerHTML="",COUNTER.textContent="0"}),TEXTAREA.addEventListener("input",function(e){COUNTER.textContent=e.target.value.length});</script>
   </body>
 </html>
