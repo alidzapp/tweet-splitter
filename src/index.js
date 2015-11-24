@@ -1,5 +1,6 @@
 const TEXTAREA = document.getElementById('tweet');
 const OUTPUT = document.getElementById('output');
+const COUNTER = document.getElementById('counter');
 
 var generateTweets = () => {
   let inputText = TEXTAREA.value;
@@ -34,4 +35,9 @@ document.getElementById('submit').addEventListener('click', generateTweets);
 document.getElementById('reset').addEventListener('click', () => {
   TEXTAREA.value = '';
   OUTPUT.innerHTML = '';
+  COUNTER.textContent = '0';
+});
+
+TEXTAREA.addEventListener('input', function( e ) {
+  COUNTER.textContent = e.target.value.length;
 });
