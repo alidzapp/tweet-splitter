@@ -23,12 +23,33 @@ Install dependencies:
 npm install
 ```
 
-Author your feature or bug fix.
+Author your feature or bug fix. Edit files in the `src` directory, as well as `./app.html`.
+
+npm tasks are as follows:
+
+`npm run serve`
+Start a browser-sync instance. Navigate to http://localhost:3000/app.html to see changes.
+
+`npm run babel`
+Convert ES6 -> ES5.
+
+`npm run uglify`
+Compress the babel'ed JS.
+
+`npm run scss`
+Compile SCSS -> CSS.
+
+`npm run scss:watch`
+Kick off the compilation of SCSS -> CSS whenever a `.scss` file changes. 
+
+`npm run inline`
+Replace `link` & `script src` tags with the contents of those files in HTML.
+
 
 Compile your changes:
 
 ```
-npm build
+npm run build
 ```
 
 Finally, commit your changes to your fork. Then, submit a pull request! I'll review, ask questions and suggest changes (if I have any). If everything looks good, I'll pull your changes in.
