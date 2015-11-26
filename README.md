@@ -7,6 +7,6 @@ Split a long Tweet into 140 character chunks (with appended numbers).
 - Tweet character count will be off if there are over 99 resulting splits. Write a blog post instead!
 
 ### Features to Add
-- Customize split counter, e.g. "[2 of 4]" instead of "(2/4)"
+- ~~Customize split counter, e.g. "[2|4]" instead of "(2/4)"~~ [ 436660b](https://github.com/damonbauer/tweet-splitter/commit/436660b29e58d8e54ed7638d1f3959b7af7f6b57)
 - Twitter integration in order to post without having to copy & paste
 - Parse URLs
