@@ -1,11 +1,13 @@
 const TEXTAREA = document.querySelector('.Tweet');
 const OUTPUT = document.querySelector('.Output');
 const COUNTER = document.querySelector('.Counter');
+const CHANGE_OPTIONS = document.querySelector('.Change-options');
 const OPTIONS = document.querySelector('.Options');
 const ELLIPSES = document.getElementById('Ellipses');
 const COUNT_WRAP = document.getElementById('Count-wrap');
 const COUNT_SEPARATOR = document.getElementById('Count-separator');
 const SUBMIT = document.getElementById('Submit');
+const RESET = document.getElementById('Reset');
 
 var generateTweets = () => {
   let inputText = TEXTAREA.value;
@@ -59,13 +61,13 @@ SUBMIT.addEventListener('click', generateTweets);
   element.addEventListener('change', generateTweets);
 });
 
-document.getElementById('Reset').addEventListener('click', () => {
+RESET.addEventListener('click', () => {
   TEXTAREA.value = '';
   OUTPUT.innerHTML = '';
   COUNTER.textContent = '0';
 });
 
-document.querySelector('.Change-options').addEventListener('click', (e) => {
+CHANGE_OPTIONS.addEventListener('click', (e) => {
   e.preventDefault();
   e.target.classList.toggle('is-active');
   OPTIONS.classList.toggle('is-active');
