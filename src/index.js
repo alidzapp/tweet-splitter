@@ -1,6 +1,11 @@
-const TEXTAREA = document.getElementById('tweet');
-const OUTPUT = document.getElementById('output');
-const COUNTER = document.getElementById('counter');
+const TEXTAREA = document.querySelector('.Tweet');
+const OUTPUT = document.querySelector('.Output');
+const COUNTER = document.querySelector('.Counter');
+const OPTIONS = document.querySelector('.Options');
+const ELLIPSES = document.getElementById('Ellipses');
+const COUNT_WRAP = document.getElementById('Count-wrap');
+const COUNT_SEPARATOR = document.getElementById('Count-separator');
+const SUBMIT = document.getElementById('Submit');
 
 var generateTweets = () => {
   let inputText = TEXTAREA.value;
@@ -9,15 +14,33 @@ var generateTweets = () => {
   OUTPUT.innerHTML = '';
 
   if (numberOfTweetsNeeded > 1) {
-    let charsToAllow = numberOfTweetsNeeded > 9 ? 129 : 131;
+    let countWrap = COUNT_WRAP.options[COUNT_WRAP.selectedIndex].value;
+    let charsToAllow = ELLIPSES.checked ? 136 : 139; // ... + space = 140
+    charsToAllow = countWrap === 'none' ? charsToAllow - 3 : charsToAllow - 5;
+
     let chunks = inputText.match(new RegExp('[\\s\\S]{1,' + charsToAllow + '}', 'g'));
 
     chunks.forEach(function(value, index) {
       let i = index + 1;
       let total = chunks.length;
-      let ellipses = i < total ? '...' : '';
 
-      buildTweetText(`${value}${ellipses} (${i}/${total})`);
+      let ellipses = (i < total && ELLIPSES.checked) ? '...' : '';
+      let countSeparator = COUNT_SEPARATOR.options[COUNT_SEPARATOR.selectedIndex].value === 'slash' ? '/' : '|';
+      let wrapChars = countWrap;
+      let wrapOpen, wrapClose;
+
+      if (wrapChars === 'parentheses') {
+        wrapOpen = '(';
+        wrapClose = ')';
+      } else if (wrapChars === 'brackets') {
+        wrapOpen = '[';
+        wrapClose = ']';
+      } else {
+        wrapOpen = '';
+        wrapClose = '';
+      }
+
+      buildTweetText(`${value}${ellipses} ${wrapOpen}${i}${countSeparator}${total}${wrapClose}`);
     });
   } else {
     buildTweetText(inputText);
@@ -26,18 +49,28 @@ var generateTweets = () => {
 
 var buildTweetText = (text) => {
   let tweetText = document.createElement('p');
-  tweetText.innerHTML = text;
+  tweetText.textContent = text;
   OUTPUT.appendChild(tweetText);
 };
 
-document.getElementById('submit').addEventListener('click', generateTweets);
+SUBMIT.addEventListener('click', generateTweets);
 
-document.getElementById('reset').addEventListener('click', () => {
+[ELLIPSES, COUNT_WRAP, COUNT_SEPARATOR].forEach(element => {
+  element.addEventListener('change', generateTweets);
+});
+
+document.getElementById('Reset').addEventListener('click', () => {
   TEXTAREA.value = '';
   OUTPUT.innerHTML = '';
   COUNTER.textContent = '0';
 });
 
-TEXTAREA.addEventListener('input', function( e ) {
+document.querySelector('.Change-options').addEventListener('click', (e) => {
+  e.preventDefault();
+  e.target.classList.toggle('is-active');
+  OPTIONS.classList.toggle('is-active');
+});
+
+TEXTAREA.addEventListener('input', function(e) {
   COUNTER.textContent = e.target.value.length;
 });

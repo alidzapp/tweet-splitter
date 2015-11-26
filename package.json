@@ -10,7 +10,7 @@
     "scss": "node-sass -x -o app --output-style compressed src/index.scss",
     "scss:watch": "node-sass -x -w -o app --output-style compressed src/index.scss",
     "serve": "browser-sync start --server",
-    "uglify": "uglifyjs app/index.js -m -c -o app/index.min.js"
+    "uglify": "uglifyjs app/index.js -m -c -e --screw-ie8 -o app/index.min.js"
   },
   "repository": {
     "type": "git",

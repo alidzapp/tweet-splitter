@@ -8,20 +8,46 @@
   </head>
   <body>
 
-    <div id="wrap">
+    <div class="Wrap">
       <h1>Tweet Splitter</h1>
 
       <p>Because sometimes, a tweet needs more than 140 characters.</p>
 
-      <div class="tweetWrapper">
-        <textarea name="tweet" id="tweet" placeholder="Enter your tweet."></textarea>
-        <div id="counter">0</div>
+      <div class="Tweet-wrapper">
+        <textarea name="tweet" class="Tweet" placeholder="Enter your tweet."></textarea>
+        <div class="Counter">0</div>
       </div>
 
-      <button id="submit">Submit</button>
-      <button id="reset">Reset</button>
+      <button id="Submit">Submit</button>
+      <button id="Reset">Reset</button>
 
-      <div id="output"></div>
+      <div class="Default-options">
+        <a href="#" class="Change-options">Change Default Options <span>&or;</span></a>
+        <form class="Options">
+          <div>
+            <label><input type="checkbox" id="Ellipses" value="ellipses" checked> Add "..." to the end of each tweet (except last)</label>
+          </div>
+
+          <div>
+            <label for="Count-wrap">Wrap tweet count with:</label>
+            <select name="Count-wrap" id="Count-wrap">
+              <option value="parentheses" selected>( ), eg: (3/4)</option>
+              <option value="brackets">[ ], eg: [3/4]</option>
+              <option value="none">None, eg: 3/4</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="Count-separator">Separate tweet count with:</label>
+            <select name="Count-separator" id="Count-separator">
+              <option value="slash" selected>/, eg: (3/4)</option>
+              <option value="pipe">|, eg: (3|4)</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <div class="Output"></div>
 
       <footer>
         <small>Made by <a href="http://damonbauer.me">Damon Bauer</a>. <a href="https://github.com/damonbauer/tweet-splitter">Check the source on GitHub</a>.</small>
