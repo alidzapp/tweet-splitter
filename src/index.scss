@@ -44,14 +44,6 @@ body {
   }
 }
 
-.Wrap {
-  @extend %LatinModernMono;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1em;
-  background-color: $green;
-}
-
 h1 {
   text-align: center;
   letter-spacing: 4px;
@@ -72,13 +64,118 @@ p {
 }
 
 a {
+  padding: 3px;
   color: $white;
   text-decoration: none;
 
   &:hover,
-  &:active {
-    text-decoration: underline;
+  &:focus {
+    background: $white;
+    color: $green;
   }
+}
+
+button {
+  @extend %LatinModernMono;
+  cursor: pointer;
+
+  &:not(.Icon) {
+    display: block;
+    padding: 0.5em;
+    border: 5px solid $green;
+    margin: 0 auto;
+    font-size: 1em;
+    background-color: $offwhite;
+    transition: border-color ease 0.2s;
+  }
+
+  &:hover,
+  &:focus {
+    outline: 0;
+    border-color: $orange;
+  }
+
+  &#Submit {
+    position: relative;
+    margin-top: -2.5em;
+    font-size: 1.5em;
+  }
+
+  &#Reset {
+    font-size: 0.75em;
+    margin-top: 1em;
+  }
+
+  &#Login,
+  &#Options {
+    padding: 3px;
+    font-size: 0.75em;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $white;
+      color: $green;
+
+      svg path {
+        fill: $green;
+      }
+    }
+  }
+
+  &#PostTweets {
+    display: none;
+
+    &.is-visible {
+      display: block;
+    }
+  }
+}
+
+.LoginArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.75em;
+  }
+}
+
+.Wrap {
+  @extend %LatinModernMono;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1em;
+  background-color: $green;
+}
+
+.Icon {
+  border: 0;
+  font-size: 0.75em;
+  text-align: center;
+  color: $white;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  svg {
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 5px;
+  }
+}
+
+.Icons {
+  display: flex;
+  justify-content: space-between;
 }
 
 .Tweet {
@@ -111,38 +208,6 @@ a {
   bottom: -1.5em;
 }
 
-button {
-  @extend %LatinModernMono;
-  cursor: pointer;
-  display: block;
-  padding: 0.5em;
-  border: 5px solid $green;
-  margin: 0 auto;
-  background-color: $offwhite;
-  transition: border-color ease 0.2s;
-
-  &:focus,
-  &:active {
-    outline: 0;
-    border-color: $orange;
-  }
-
-  &#Submit {
-    position: relative;
-    margin-top: -2.5em;
-    font-size: 1.5em;
-  }
-
-  &#Reset {
-    font-size: 0.75em;
-    margin-top: 1em;
-  }
-
-  &#Refresh {
-    font-size: 0.75em;
-  }
-}
-
 .Output {
   margin-top: 1em;
   background-color: #fafafa;
@@ -154,36 +219,24 @@ button {
   }
 }
 
-.Default-options {
-  margin: 1em 0;
-}
-
-.Change-options {
-  display: block;
-  text-align: center;
-
-  &.is-active {
-    span {
-      transform: rotate(180deg);
-    }
-  }
-
-  span {
-    display: inline-block;
-    font-size: 0.75em;
-    transform: rotate(0deg);
-    transition: transform 0.3s ease;
-  }
-}
-
 .Options {
-  margin: 1em 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+  @extend %LatinModernMono;
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1em;
 
   &.is-active {
-    max-height: 250px;
+    display: block;
+    position: fixed;
+    overflow-y: scroll;
+    background-color: $white;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+  }
+
+  p {
+    color: #333;
   }
 
   div {
@@ -201,9 +254,13 @@ button {
   }
 }
 
+#Options-close {
+  float: right;
+}
+
 footer {
   clear: both;
   text-align: center;
   background-color: $green;
-  padding-bottom: 1em;
+  padding: 1em 0;
 }

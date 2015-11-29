@@ -4,13 +4,12 @@
   "description": "Split a long Tweet into 140 character chunks (with appended numbers).",
   "main": "index.js",
   "scripts": {
-    "build": "npm run babel && npm run uglify && npm run scss && npm run inline",
-    "babel": "babel src/index.js -d app && mv app/src/index.js app && rm -r app/src",
-    "inline": "html-inline -i app.html -o index.html",
+    "build": "npm run babel && npm run uglify && npm run scss",
+    "babel": "babel src/index.js -o app/index.js",
     "scss": "node-sass -x -o app --output-style compressed src/index.scss",
     "scss:watch": "node-sass -x -w -o app --output-style compressed src/index.scss",
-    "serve": "browser-sync start --server",
-    "uglify": "uglifyjs app/index.js -m -c -e --screw-ie8 -o app/index.min.js"
+    "serve": "browser-sync start --server --tunnel tweetsplitter",
+    "uglify": "uglifyjs app/index.js vendor/hello.js vendor/hello.twitter.js -mce -r 'hello' --screw-ie8 -o app/index.min.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +31,6 @@
     "babel-cli": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "browser-sync": "^2.10.0",
-    "html-inline": "^1.2.0",
     "node-sass": "^3.4.2",
     "uglify-js": "^2.6.1"
   }

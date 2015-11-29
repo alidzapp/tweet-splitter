@@ -3,13 +3,17 @@
 var TEXTAREA = document.querySelector('.Tweet');
 var OUTPUT = document.querySelector('.Output');
 var COUNTER = document.querySelector('.Counter');
-var CHANGE_OPTIONS = document.querySelector('.Change-options');
+var OPTIONS_OPEN = document.getElementById('Options');
+var OPTIONS_CLOSE = document.getElementById('Options-close');
 var OPTIONS = document.querySelector('.Options');
 var ELLIPSES = document.getElementById('Ellipses');
 var COUNT_WRAP = document.getElementById('Count-wrap');
 var COUNT_SEPARATOR = document.getElementById('Count-separator');
 var SUBMIT = document.getElementById('Submit');
 var RESET = document.getElementById('Reset');
+var LOGIN = document.getElementById('Login');
+var LOGIN_AREA = document.querySelector('.LoginArea');
+var POST = document.getElementById('PostTweets');
 
 var generateTweets = function generateTweets() {
   var inputText = TEXTAREA.value;
@@ -60,24 +64,54 @@ var buildTweetText = function buildTweetText(text) {
   OUTPUT.appendChild(tweetText);
 };
 
-SUBMIT.addEventListener('click', generateTweets);
+LOGIN.addEventListener('click', function () {
+  var twitter = hello('twitter');
 
-[ELLIPSES, COUNT_WRAP, COUNT_SEPARATOR].forEach(function (element) {
-  element.addEventListener('change', generateTweets);
+  hello.init({
+    'twitter': '1gckkpFfOPYAa1cFAb25fAw6N'
+  }, {
+    redirect_uri: 'redirect.html',
+    oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
+  });
+
+  twitter.login().then(function () {
+    return twitter.api('me');
+  }).then(function (p) {
+    LOGIN_AREA.innerHTML = '<img src="' + p.thumbnail + '" width="28" height="28"><p>' + p.screen_name + '</p>';
+    POST.classList.add('is-visible');
+  });
 });
+
+POST.addEventListener('click', function () {
+  var tweets = document.querySelectorAll(".Output p");
+
+  [].forEach.call(tweets, function (tweet) {
+    hello('twitter').api('statuses/update', 'POST', {
+      status: tweet
+    });
+  });
+});
+
+SUBMIT.addEventListener('click', generateTweets);
 
 RESET.addEventListener('click', function () {
   TEXTAREA.value = '';
   OUTPUT.innerHTML = '';
   COUNTER.textContent = '0';
+  POST.classList.remove('is-visible');
 });
 
-CHANGE_OPTIONS.addEventListener('click', function (e) {
-  e.preventDefault();
-  e.target.classList.toggle('is-active');
-  OPTIONS.classList.toggle('is-active');
+[OPTIONS_OPEN, OPTIONS_CLOSE].forEach(function (element) {
+  element.addEventListener('click', function (e) {
+    e.preventDefault();
+    OPTIONS.classList.toggle('is-active');
+  });
 });
 
 TEXTAREA.addEventListener('input', function (e) {
   COUNTER.textContent = e.target.value.length;
+});
+
+[ELLIPSES, COUNT_WRAP, COUNT_SEPARATOR].forEach(function (element) {
+  element.addEventListener('change', generateTweets);
 });
