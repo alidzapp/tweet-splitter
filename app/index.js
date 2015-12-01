@@ -68,10 +68,9 @@ LOGIN.addEventListener('click', function () {
   var twitter = hello('twitter');
 
   hello.init({
-    'twitter': '1gckkpFfOPYAa1cFAb25fAw6N'
+    'twitter': 'tJRlLWgAQfwA0nIKuyU9bAcKr'
   }, {
-    redirect_uri: 'redirect.html',
-    oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
+    redirect_uri: 'redirect.html'
   });
 
   twitter.login().then(function () {
