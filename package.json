@@ -1,6 +1,6 @@
 {
   "name": "tweet-splitter",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Split a long Tweet into 140 character chunks (with appended numbers).",
   "main": "index.js",
   "scripts": {
