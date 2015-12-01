@@ -4,12 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tweet Splitter</title>
-    <style>@import "//brick.a.ssl.fastly.net/Latin+Modern+Mono:400";.Wrap,.Tweet,button,.Options select{font-family:"Latin Modern Mono", monospace}*{box-sizing:border-box}html{background-color:#fafafa}body{margin:0 3em;font-size:1.25em;overflow-x:hidden}@media (max-width: 500px){body{margin:0}}body:before{content:"";position:fixed;z-index:-1;width:140%;height:70%;left:-20%;top:15%;background-color:#65f29b;transform:rotate(-10deg) skew(-20deg)}@media (max-width: 500px){body:before{height:80%;top:15%}}.Wrap{max-width:600px;margin:0 auto;padding:1em;background-color:#65f29b}h1{text-align:center;letter-spacing:4px;color:#fff}@media (max-width: 600px){h1{font-size:1.5em}}@media (max-width: 500px){h1{letter-spacing:0}}p{font-size:1.125em;color:#fff}a{color:#fff;text-decoration:none}a:hover,a:active{text-decoration:underline}.Tweet{display:block;width:100%;height:250px;padding:0.5em 0.5em 1.5em;margin-bottom:2em;border:10px solid #65f29b;resize:none;font-size:1em;background-color:#fafafa;transition:border-color ease 0.2s}.Tweet:focus,.Tweet:active{outline:0;border-color:#ffb86a}.Tweet-wrapper{position:relative}.Counter{position:absolute;right:1em;bottom:-1.5em}button{cursor:pointer;display:block;padding:0.5em;border:5px solid #65f29b;margin:0 auto;background-color:#fafafa;transition:border-color ease 0.2s}button:focus,button:active{outline:0;border-color:#ffb86a}button#Submit{position:relative;margin-top:-2.5em;font-size:1.5em}button#Reset{font-size:0.75em;margin-top:1em}button#Refresh{font-size:0.75em}.Output{margin-top:1em;background-color:#fafafa;border:10px solid #65f29b}.Output p{padding:0.5em;color:#000}.Default-options{margin:1em 0}.Change-options{display:block;text-align:center}.Change-options.is-active span{transform:rotate(180deg)}.Change-options span{display:inline-block;font-size:0.75em;transform:rotate(0deg);transition:transform 0.3s ease}.Options{margin:1em 0;max-height:0;overflow:hidden;transition:max-height 0.3s ease}.Options.is-active{max-height:250px}.Options div{clear:both}.Options div:not(:last-child){margin-bottom:1em}.Options select{display:inline-block;font-size:1em}footer{clear:both;text-align:center;background-color:#65f29b;padding-bottom:1em}
-</style>
+    <link rel="stylesheet" href="app/index.css">
   </head>
   <body>
+    <div style="display:none">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="icon-twitter" viewBox="0 0 612 612"><path d="M612 116.258c-22.525 9.98-46.694 16.75-72.088 19.772 25.93-15.527 45.777-40.155 55.184-69.41-24.322 14.378-51.17 24.82-79.775 30.48-22.9-24.438-55.49-39.66-91.63-39.66-69.33 0-125.55 56.218-125.55 125.514 0 9.828 1.11 19.427 3.25 28.606-104.32-5.24-196.83-55.223-258.75-131.174-10.82 18.51-16.98 40.078-16.98 63.1 0 43.56 22.188 81.994 55.84 104.48-20.573-.688-39.924-6.348-56.865-15.756v1.568c0 60.806 43.29 111.554 100.693 123.104-10.517 2.83-21.607 4.398-33.08 4.398-8.107 0-15.947-.803-23.634-2.333 15.985 49.907 62.336 86.2 117.253 87.194-42.948 33.66-97.1 53.66-155.917 53.66-10.135 0-20.117-.61-29.945-1.72 55.568 35.68 121.537 56.486 192.44 56.486 230.947 0 357.187-191.29 357.187-357.187l-.42-16.254c24.66-17.595 46-39.7 62.79-64.863z" fill="#fff" /></symbol>
+
+        <symbol id="icon-options" viewBox="0 0 268.765 268.765"><path d="M267.92 119.46c-.42-3.78-4.83-6.62-8.64-6.62-12.3 0-23.24-7.23-27.82-18.4-4.7-11.46-1.67-24.82 7.5-33.24 2.9-2.64 3.25-7.06.83-10.13-6.4-8-13.5-15.24-21.3-21.5-3.1-2.46-7.6-2.12-10.3.82-8 8.8-22.4 12.1-33.5 7.5-11.6-4.9-18.9-16.6-18.17-29.2.22-4-2.67-7.4-6.6-7.9C140-.28 129.83-.3 119.8.8c-3.9.44-6.8 3.8-6.66 7.7.43 12.46-6.95 23.98-18.4 28.68-11 4.48-25.28 1.2-33.27-7.58-2.64-2.9-7.06-3.25-10.14-.85-8.06 6.32-15.38 13.55-21.74 21.5-2.5 3.08-2.2 7.55.8 10.2 9.3 8.5 12.3 21.95 7.5 33.55-4.7 11.03-16.1 18.15-29.3 18.15-4.28-.14-7.3 2.72-7.78 6.6-1.2 10.1-1.2 20.38-.08 30.56.42 3.8 4.96 6.7 8.8 6.7 11.7-.3 22.94 6.97 27.66 18.4 4.7 11.5 1.7 24.8-7.5 33.27-2.87 2.64-3.24 7.06-.8 10.13 6.23 7.94 13.4 15.2 21.24 21.5 3.07 2.5 7.55 2.13 10.22-.8 8.03-8.9 22.42-12.2 33.5-7.55 11.6 4.85 18.9 16.57 18.17 29.17-.2 3.95 2.7 7.4 6.6 7.85 5.15.6 10.3.9 15.5.9 4.9 0 9.84-.26 14.75-.8 3.9-.44 6.8-3.8 6.65-7.7-.44-12.46 6.96-23.98 18.4-28.67 11.08-4.53 25.3-1.23 33.3 7.56 2.66 2.9 7.05 3.24 10.14.84 8.03-6.3 15.34-13.52 21.73-21.48 2.46-3.1 2.1-7.58-.8-10.2-9.37-8.5-12.4-21.98-7.55-33.56 4.6-10.9 15.6-18.2 27.5-18.2l1.67.04c3.84.33 7.4-2.64 7.85-6.57 1.18-10.1 1.2-20.36.06-30.54zM134.6 179.5c-24.72 0-44.83-20.1-44.83-44.83 0-24.72 20.1-44.83 44.83-44.83 24.7 0 44.82 20.1 44.82 44.83 0 24.72-20.1 44.82-44.82 44.82z" fill-rule="evenodd" clip-rule="evenodd" fill="#fff" /></symbol>
+
+        <symbol id="icon-close" viewBox="0 0 512 512"><path d="M438.393 374.595L319.757 255.977l118.62-118.63-63.782-63.74-118.6 118.618-118.62-118.603-63.768 63.73 118.64 118.63L73.62 374.626l63.73 63.768L256 319.734 374.65 438.38" fill="#65f29b" /></symbol>
+      </svg>
+    </div>
 
     <div class="Wrap">
+      <nav class="Icons">
+        <button id="Options" class="Icon">
+          <svg><use xlink:href="#icon-options"></use></svg>
+          Options
+        </button>
+
+        <div class="LoginArea">
+          <button id="Login" class="Icon">
+            <svg><use xlink:href="#icon-twitter"></use></svg>
+            Login to Twitter
+          </button>
+          <div id="LoginResult"></div>
+        </div>
+      </nav>
+
       <h1>Tweet Splitter</h1>
 
       <p>Because sometimes, a tweet needs more than 140 characters.</p>
@@ -22,39 +45,45 @@
       <button id="Submit">Submit</button>
       <button id="Reset">Reset</button>
 
-      <div class="Default-options">
-        <a href="#" class="Change-options">Change Default Options <span>&or;</span></a>
-        <form class="Options">
-          <div>
-            <label><input type="checkbox" id="Ellipses" value="ellipses" checked> Add "..." to the end of each tweet (except last)</label>
-          </div>
-
-          <div>
-            <label for="Count-wrap">Wrap tweet count with:</label>
-            <select name="Count-wrap" id="Count-wrap">
-              <option value="parentheses" selected>( ), eg: (3/4)</option>
-              <option value="brackets">[ ], eg: [3/4]</option>
-              <option value="none">None, eg: 3/4</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="Count-separator">Separate tweet count with:</label>
-            <select name="Count-separator" id="Count-separator">
-              <option value="slash" selected>/, eg: (3/4)</option>
-              <option value="pipe">|, eg: (3|4)</option>
-            </select>
-          </div>
-        </form>
-      </div>
-
       <div class="Output"></div>
+      <button id="PostTweets">Post Tweets</button>
 
       <footer>
-        <small>Made by <a href="http://damonbauer.me">Damon Bauer</a>. <a href="https://github.com/damonbauer/tweet-splitter">Check the source on GitHub</a>.</small>
+        <small>Made by <a href="http://damonbauer.me">Damon Bauer</a> | <a href="https://github.com/damonbauer/tweet-splitter">Source</a></small>
       </footer>
     </div>
 
-    <script>!function(){"use strict";var e=document.querySelector(".Tweet"),t=document.querySelector(".Output"),n=document.querySelector(".Counter"),c=document.querySelector(".Change-options"),o=document.querySelector(".Options"),u=document.getElementById("Ellipses"),a=document.getElementById("Count-wrap"),i=document.getElementById("Count-separator"),d=document.getElementById("Submit"),r=document.getElementById("Reset"),l=function(){var n=e.value,c=Math.ceil(n.length/140);t.innerHTML="",c>1?!function(){var e=a.options[a.selectedIndex].value,t=u.checked?136:139;t="none"===e?t-3:t-5;var c=n.match(new RegExp("[\\s\\S]{1,"+t+"}","g"));c.forEach(function(t,n){var o=n+1,a=c.length,d=a>o&&u.checked?"...":"",r="slash"===i.options[i.selectedIndex].value?"/":"|",l=e,v=void 0,m=void 0;"parentheses"===l?(v="(",m=")"):"brackets"===l?(v="[",m="]"):(v="",m=""),s(""+t+d+" "+v+o+r+a+m)})}():s(n)},s=function(e){var n=document.createElement("p");n.textContent=e,t.appendChild(n)};d.addEventListener("click",l),[u,a,i].forEach(function(e){e.addEventListener("change",l)}),r.addEventListener("click",function(){e.value="",t.innerHTML="",n.textContent="0"}),c.addEventListener("click",function(e){e.preventDefault(),e.target.classList.toggle("is-active"),o.classList.toggle("is-active")}),e.addEventListener("input",function(e){n.textContent=e.target.value.length})}();</script>
+    <form class="Options">
+      <button id="Options-close" class="Icon">
+        <svg><use xlink:href="#icon-close"></use></svg>
+      </button>
+
+      <h2>Options</h2>
+      <p>Change default options to format each of your split tweets.</p>
+      <p>Close this window when you're finished; the output will automatically update.</p><br>
+
+      <div>
+        <label><input type="checkbox" id="Ellipses" value="ellipses" checked> Append "..." to the end of each tweet</label>
+      </div>
+
+      <div>
+        <label for="Count-wrap">Wrap tweet count with:</label>
+        <select name="Count-wrap" id="Count-wrap">
+          <option value="parentheses" selected>( ), eg: (3/4)</option>
+          <option value="brackets">[ ], eg: [3/4]</option>
+          <option value="none">None, eg: 3/4</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="Count-separator">Separate tweet count with:</label>
+        <select name="Count-separator" id="Count-separator">
+          <option value="slash" selected>/, eg: (3/4)</option>
+          <option value="pipe">|, eg: (3|4)</option>
+        </select>
+      </div>
+    </form>
+
+    <script src="app/index.min.js"></script>
   </body>
 </html>
